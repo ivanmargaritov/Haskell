@@ -20,11 +20,10 @@ pref xs = [take x xs | x <- [1..length xs]]
 suff [] = [[]]
 suff xs = [drop x xs | x <- [0..(length xs-1)]]
 
-removeDuplicates = rdHelper []
-    where rdHelper seen [] = seen
-          rdHelper seen (x:xs)
-              | x `elem` seen = rdHelper seen xs
-              | otherwise = rdHelper (seen ++ [x]) xs
+removeDuplicates [] = []
+removeDuplicates (x:xs) 
+	| x `elem` xs = removeDuplicates xs
+	| otherwise = x: removeDuplicates xs
 
 sublists [] [] = False
 sublists [] _ = False
